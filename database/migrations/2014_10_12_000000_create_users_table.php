@@ -49,6 +49,7 @@ class CreateUsersTable extends Migration
             $table->id();
 			$table->integer('user_id');
             $table->integer('blood_type_id');	
+            $table->integer('city_id');	
             $table->integer('hospital_id');	
             $table->integer('number_of_units');	
             $table->integer('left_number_of_units');	

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Health_records extends Model
+class Donation extends Model
 {
-    protected $table = "health_records";
+    protected $table = "donations";
 }
