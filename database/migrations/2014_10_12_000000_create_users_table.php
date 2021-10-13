@@ -45,7 +45,7 @@ class CreateUsersTable extends Migration
 			$table->softDeletes();
         });
 
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('blood_requests', function (Blueprint $table) {
             $table->id();
 			$table->integer('user_id');
             $table->integer('blood_type_id');	
@@ -62,7 +62,7 @@ class CreateUsersTable extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
 			$table->integer('user_id');
-            $table->integer('request_id');	
+            $table->integer('blood_request_id');	
             $table->boolean('is_accepted');
             $table->timestamps();
 			$table->softDeletes();

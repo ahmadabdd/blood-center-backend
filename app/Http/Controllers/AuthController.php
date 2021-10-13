@@ -5,30 +5,39 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use JWTAuth;
 
 class AuthController extends Controller {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    // }
 
 
-    public function login(Request $request) {
+    function login(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
-
-        if ($validator->fails()) {
+		if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        if (!$token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->createNewToken($token);
-    }
+		try{
+			if(!$token = JWTAuth::attempt($validator->validated())){
+				return response()->json(array(
+					"status" => 'KO',
+					"errors" => 'Invalid Credentials!'
+				), 401);
+				}
+		}catch(JWTException $e){
+			return json_encode(["error" => "Error occured"]);
+		}
+		
+		$user = JWTAuth::user();
+		$user->token = $token;
+		return json_encode($user);
+	}
 
 
     public function register(Request $request) {
@@ -71,7 +80,7 @@ class AuthController extends Controller {
     }
 
     public function userProfile() {
-        return response()->json(auth()->user());
+        return response()->json(JWTAuth::user());
     }
 
     protected function createNewToken($token)
