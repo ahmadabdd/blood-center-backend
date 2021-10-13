@@ -27,13 +27,13 @@ class CreateUsersTable extends Migration
 
         Schema::create('health_records', function (Blueprint $table) {
             $table->id();
-			$table->integer('user_id');
-            $table->integer('blood_type_id');	
-            $table->date('date_of_birth');	
-            $table->date('last_donation');	
-            $table->boolean('is_available');
-            $table->boolean('is_smoker');
-            $table->boolean('have_tattoo');
+			$table->integer('user_id')->nullable();
+            $table->integer('blood_type_id')->nullable();	
+            $table->date('date_of_birth')->nullable();	
+            $table->date('last_donation')->nullable();	
+            $table->boolean('is_available')->nullable();
+            $table->boolean('is_smoker')->nullable();
+            $table->boolean('have_tattoo')->nullable();
             $table->timestamps();
 			$table->softDeletes();
         });
@@ -47,14 +47,14 @@ class CreateUsersTable extends Migration
 
         Schema::create('blood_requests', function (Blueprint $table) {
             $table->id();
-			$table->integer('user_id');
-            $table->integer('blood_type_id');	
-            $table->integer('city_id');	
-            $table->integer('hospital_id');	
-            $table->integer('number_of_units');	
-            $table->integer('left_number_of_units');	
-            $table->date('expiry_date');	
-            $table->boolean('is_closed');
+			$table->integer('user_id')->nullable();
+            $table->integer('blood_type_id')->nullable();	
+            $table->integer('city_id')->nullable();	
+            $table->integer('hospital_id')->nullable();	
+            $table->integer('number_of_units')->nullable();	
+            $table->integer('left_number_of_units')->nullable();	
+            $table->date('expiry_date')->nullable();	
+            $table->boolean('is_closed')->nullable();
             $table->timestamps();
 			$table->softDeletes();
         });

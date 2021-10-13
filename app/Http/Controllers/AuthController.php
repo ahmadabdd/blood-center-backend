@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Health_record;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+
 use JWTAuth;
 
 class AuthController extends Controller {
@@ -58,8 +63,25 @@ class AuthController extends Controller {
 
         $user = User::create(array_merge(
             $validator->validated(),
-            ['password' => bcrypt($request->password)]
+            ['password' => bcrypt($request->password),
+             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]
         ));
+
+        
+        Health_record::insert([
+            'user_id' => $user->id,
+            'blood_type_id' => null,
+            'date_of_birth' => null,
+            'last_donation' => null,
+            'is_available' => null,
+            'is_smoker' => null,
+            'have_tattoo' => null,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
 
         return response()->json([
             'status' => true,

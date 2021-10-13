@@ -62,4 +62,8 @@ class User extends Authenticatable implements JWTSubject // Added here
     {
         return [];
     }
+
+    public function health_records(){
+        return $this->hasOne('App\Models\Health_record')->select('user_id');
+    }
 }
