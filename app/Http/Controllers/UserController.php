@@ -366,6 +366,20 @@ class UserController extends Controller {
     public function fill_health_record(Request $request) {
         $id = JWTAuth::user()->id;
 
-        return $id;
+        DB::table('health_records')
+            ->where("user_id", $id)
+            ->update(["blood_type_id" => $request->blood_type_id,
+                      "date_of_birth" => $request->date_of_birth,
+                      "last_donation" => $request->last_donation,
+                      "is_available" => $request->is_available,
+                      "is_smoker" => $request->is_smoker,
+                      "have_tattoo" => $request->have_tattoo,
+                      'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Health record filled successfully.',
+        ], 201);
     }
 }
