@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('city_id');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();
         });
 
@@ -34,15 +35,14 @@ class CreateUsersTable extends Migration
             $table->boolean('is_available')->nullable();
             $table->boolean('is_smoker')->nullable();
             $table->boolean('have_tattoo')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 			$table->softDeletes();
         });
 
         Schema::create('blood_types', function (Blueprint $table) {
             $table->id();
 			$table->string('type');
-            $table->timestamps();
-			$table->softDeletes();
         });
 
         Schema::create('blood_requests', function (Blueprint $table) {
@@ -55,7 +55,8 @@ class CreateUsersTable extends Migration
             $table->integer('left_number_of_units')->nullable();	
             $table->date('expiry_date')->nullable();	
             $table->boolean('is_closed')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 			$table->softDeletes();
         });
 
@@ -64,7 +65,8 @@ class CreateUsersTable extends Migration
 			$table->integer('user_id');
             $table->integer('blood_request_id');	
             $table->boolean('is_accepted');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 			$table->softDeletes();
         });
 
@@ -77,6 +79,33 @@ class CreateUsersTable extends Migration
             $table->id();
 			$table->string('name');
             $table->integer('city_id');
+        });
+        
+        Schema::create('connections', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id1');
+            $table->integer('user_id2');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+        });
+        
+        Schema::create('messages', function (Blueprint $table) {
+            $table->id();
+            $table->integer('connection_id');
+            $table->integer('sender_id');
+            $table->integer('receiver_id');
+			$table->text('message_body');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
+        });
+
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+			$table->string('header');
+			$table->string('body');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

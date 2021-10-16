@@ -11,6 +11,9 @@ use App\Models\Hospital;
 use App\Models\Blood_request;
 use App\Models\Donation;
 use App\Models\Health_record;
+use App\Models\Connection;
+use App\Models\Message;
+use App\Models\Notification;
 
 class DatabaseSeeder extends Seeder
 {
@@ -310,6 +313,81 @@ class DatabaseSeeder extends Seeder
             "is_accepted" => 0
         ]);
 
-        // \App\Models\User::factory(10)->create();
+        // Connection seeders
+        Connection::insert([
+            "user_id1" => 1,
+            "user_id2" => 2
+        ]);
+        
+        Connection::insert([
+            "user_id1" => 2,
+            "user_id2" => 1
+        ]);
+
+        Connection::insert([
+            "user_id1" => 1,
+            "user_id2" => 3
+        ]);
+
+        Connection::insert([
+            "user_id1" => 3,
+            "user_id2" => 1
+        ]);
+
+
+        // Message seeders
+        Message::insert([
+            "connection_id" => 1,
+            "sender_id" => 1,
+            "receiver_id" => 2,
+            "message_body" => "Hi Nader! how are you?"
+        ]);
+
+        Message::insert([
+            "connection_id" => 1,
+            "sender_id" => 2,
+            "receiver_id" => 1,
+            "message_body" => "Hello Ahmad! I'm good?"
+        ]);
+
+        Message::insert([
+            "connection_id" => 1,
+            "sender_id" => 1,
+            "receiver_id" => 2,
+            "message_body" => "Are you coming to donate today?"
+        ]);
+
+        Message::insert([
+            "connection_id" => 1,
+            "sender_id" => 2,
+            "receiver_id" => 1,
+            "message_body" => "Yes sure! I'll be there by 12pm"
+        ]);
+
+        Message::insert([
+            "connection_id" => 1,
+            "sender_id" => 1,
+            "receiver_id" => 2,
+            "message_body" => "Great! Seeya"
+        ]);
+
+        // Notification seeders
+        Notification::insert([
+            'user_id' => 2,
+            'header' => 'New A+ request!',
+            'body' => 'Would you like to donate?'
+        ]); 
+
+        Notification::insert([
+            'user_id' => 1,
+            'header' => 'New AB+ request!',
+            'body' => 'Would you like to donate?'
+        ]);
+
+        Notification::insert([
+            'user_id' => 1,
+            'header' => 'New donor!',
+            'body' => 'New donor has accepted your blood request.'
+        ]);
     }
 }

@@ -17,6 +17,9 @@ use App\Models\City;
 use App\Models\Hospital;
 use App\Models\Blood_request;
 use App\Models\Donation;
+use App\Models\Notification;
+use App\Models\Message;
+use App\Models\Connection;
 
 // Blood Type seeders
         /*
@@ -64,10 +67,40 @@ class UserController extends Controller {
         $users = User::with('health-records')->find(1);
 	}
 
+	public function get_blood_types() {
+        $blood_types = Blood_type::select('*')->get();
+        return $blood_types;
+	}
+
 	public function get_cities() {
         $cities = City::select('*')->get();
         return $cities;
 	}
+
+    public function get_hospitals(Request $request) {
+
+        if ($request->has('city_id')) {
+            $city_id = $request->city_id;
+            $hospitals = Hospital::select('*')
+                             ->where('city_id', $city_id)
+                             ->get();
+        return $hospitals;
+        }
+        $city_id = $request->city_id;
+        $hospitals = Hospital::select('*')->get();
+        return $hospitals;
+        
+	}
+
+    public function get_notifications() {
+        $id = JWTAuth::user()->id;
+
+        $notifications = Notification::select('*')
+                                     ->where('user_id', $id)
+                                     ->get();
+        return $notifications;
+    }
+
 
     // to be adjusted. advanced filter search
     // public function get_all_requests() {
@@ -91,31 +124,33 @@ class UserController extends Controller {
 
     public function get_all_requests(Request $request) {
 
-        if($request->has('blood_type')) {
-            $blood_type = $request->blood_type;
+        if($request->has('blood_type_id')) {
+            $blood_type_id = $request->blood_type_id;
             $requests = DB::table('blood_requests')
             ->where('blood_requests.is_closed', 0)
-            ->where('blood_types.type', $blood_type)
+            ->where('blood_types.id', $blood_type_id)
             ->join('users', 'blood_requests.user_id', '=', 'users.id')
             ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
             ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
             ->join('hospitals', 'blood_requests.hospital_id', '=', 'hospitals.id')
             ->select('blood_requests.id',
                      'blood_requests.left_number_of_units',
-                     'blood_requests.expiry_date',
+                     'blood_requests.expiry_date as expiry_date',
                      'blood_types.type',
                      'cities.name as city',
                      'hospitals.name as hospital',
                      'users.first_name',
-                     'users.last_name')
+                     'users.last_name',
+                     'blood_requests.created_at')
+            ->orderBy('blood_requests.created_at', 'asc')         
             ->get();
             return $requests;
         } 
-        elseif($request->has('city')) {
-            $city = $request->city;
+        elseif($request->has('city_id')) {
+            $city_id = $request->city_id;
             $requests = DB::table('blood_requests')
             ->where('blood_requests.is_closed', 0)
-            ->where('cities.name', $city)
+            ->where('cities.id', $city_id)
             ->join('users', 'blood_requests.user_id', '=', 'users.id')
             ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
             ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
@@ -127,7 +162,9 @@ class UserController extends Controller {
                      'cities.name as city',
                      'hospitals.name as hospital',
                      'users.first_name',
-                     'users.last_name')
+                     'users.last_name',
+                     'blood_requests.created_at')
+            ->orderBy('blood_requests.created_at', 'desc')  
             ->get();
             return $requests;
         } 
@@ -145,11 +182,34 @@ class UserController extends Controller {
                      'cities.name as city',
                      'hospitals.name as hospital',
                      'users.first_name',
-                     'users.last_name')
+                     'users.last_name',
+                     'blood_requests.created_at')
+            ->orderBy('blood_requests.created_at', 'desc')  
             ->get();
         return $requests;
         }
 	}
+
+    public function get_request_data(Request $request) {
+        $request_id = $request->request_id;
+        $request_data = DB::table('blood_requests')
+            ->where('blood_requests.id', $request_id)
+            ->join('users', 'blood_requests.user_id', '=', 'users.id')
+            ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
+            ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
+            ->join('hospitals', 'blood_requests.hospital_id', '=', 'hospitals.id')
+            ->select('blood_requests.id',
+                     'blood_requests.left_number_of_units',
+                     'blood_requests.expiry_date',
+                     'blood_types.type',
+                     'cities.name as city',
+                     'hospitals.name as hospital',
+                     'users.first_name',
+                     'users.last_name',
+                     'blood_requests.created_at')
+            ->get();
+        return $request_data;
+    }
 
     public function get_user_requests() {
         $user = JWTAuth::user();
@@ -157,6 +217,28 @@ class UserController extends Controller {
 
         $user_requests = DB::table('blood_requests')
             ->where('user_id', $id)
+            ->where('is_closed', 0)
+            ->join('users', 'blood_requests.user_id', '=', 'users.id')
+            ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
+            ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
+            ->join('hospitals', 'blood_requests.hospital_id', '=', 'hospitals.id')
+            ->select('blood_requests.id',
+                     'blood_requests.left_number_of_units',
+                     'blood_requests.expiry_date',
+                     'blood_requests.is_closed',
+                     'cities.name as city',
+                     'hospitals.name as hospital')
+            ->get();
+        return $user_requests;
+	}
+
+    public function get_user_requests_fulfilled() {
+        $user = JWTAuth::user();
+        $id = $user->id;
+
+        $user_requests = DB::table('blood_requests')
+            ->where('user_id', $id)
+            ->where('is_closed', 1)
             ->join('users', 'blood_requests.user_id', '=', 'users.id')
             ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
             ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
@@ -172,7 +254,7 @@ class UserController extends Controller {
 	}
 
     public function get_request_donations(Request $request) {
-        $blood_request_id = $request->id;
+        $blood_request_id = $request->request_id;
 
         $request_donations = DB::table('donations')
                                ->where('blood_request_id', $blood_request_id)
@@ -183,6 +265,7 @@ class UserController extends Controller {
                                ->join('hospitals', 'blood_requests.hospital_id', '=', 'hospitals.id')
                                ->select('donations.id', 
                                         'donations.is_accepted',
+                                        'users.id as user_id' ,
                                         'users.first_name',
                                         'users.last_name',
                                         'blood_types.type',
@@ -251,6 +334,10 @@ class UserController extends Controller {
             'is_closed'=> '0'
         ]);
 
+        Notification::insert([
+
+        ]);
+
         return response()->json([
             'status' => true,
             'message' => 'Request sent successfully.',
@@ -292,7 +379,7 @@ class UserController extends Controller {
 
         DB::table('donations')
           ->insert([
-              'user_id' => $request->user_id,
+              'user_id' => $id,
               'blood_request_id' => $request->blood_request_id,
               'is_accepted' => 0
           ]);
@@ -381,5 +468,93 @@ class UserController extends Controller {
             'status' => true,
             'message' => 'Health record filled successfully.',
         ], 201);
+    }
+
+    public function visit_profile(Request $request) {
+        $user_id = $request->user_id;
+
+        $user_data = DB::table('users')
+                       ->where('users.id', $user_id)
+                       ->join('health_records', 'users.id', '=', 'health_records.user_id')
+                       ->join('blood_types', 'health_records.blood_type_id', '=', 'blood_types.id')
+                       ->join('cities', 'users.city_id', '=', 'cities.id')
+                       ->select('users.first_name',
+                                'users.last_name',
+                                'users.email',
+                                'cities.name',
+                                'blood_types.type',
+                                'health_records.date_of_birth',    
+                                'health_records.last_donation',    
+                                'health_records.is_available',
+                                'health_records.is_smoker',
+                                'health_records.have_tattoo')
+                       ->get();
+        return $user_data;
+    }
+
+    public function set_available() {
+        $id = JWTAuth::user()->id;
+
+        DB::table('health_records')
+          ->where('user_id', $id)
+          ->update([
+             'is_available' => 1
+          ]);
+        
+        return response()->json([
+            'status' => true,
+            'message' => 'You are available now.',
+        ], 201);
+    }
+    
+    public function set_unavailable() {
+        $id = JWTAuth::user()->id;
+
+        DB::table('health_records')
+          ->where('user_id', $id)
+          ->update([
+             'is_available' => 0
+          ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'You are not available now.',
+        ], 201);
+    }
+
+    public function send_message(Request $request) {
+        $id = JWTAuth::user()->id;
+        $connection_id = $request->connection_id;
+        $receiver_id = $request->receiver_id;
+        $message = $request->message_body;
+
+        Message::insert([
+            'connection_id' =>  $connection_id,
+            'sender_id' => $id,
+            'receiver_id' => $receiver_id,
+            'message_body' => $message,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Sent.',
+        ], 201);
+    }
+
+    public function get_chats() {
+        $id = JWTAuth::user()->id;
+
+        $chats = DB::table('connections')
+        //   ->where('user_id1', '!=', $id)
+          ->where('user_id1', $id)
+          ->join('users', 'connections.user_id2', '=', 'users.id')
+          ->select('connections.id',
+                   'users.first_name',
+                   'users.last_name',
+                   'connections.updated_at')
+          ->get();
+
+        return $chats;
     }
 }
