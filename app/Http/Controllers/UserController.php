@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
+
 
 
 use JWTAuth;
@@ -287,6 +291,7 @@ class UserController extends Controller {
                        ->select('users.first_name',
                                 'users.last_name',
                                 'users.email',
+                                'users.profile_picture_url',
                                 'cities.name',
                                 'blood_types.type',
                                 'health_records.date_of_birth',    
@@ -557,4 +562,26 @@ class UserController extends Controller {
 
         return $chats;
     }
+
+    // run php artisan storage:link when testing
+	public function upload_image(Request $request){
+		$id = JWTAuth::user()->id;
+		$image = $request->profile_picture_url;  
+
+    	$imageName = Str::random(12).'.'.'jpg';
+
+		// decode and store image public/storage
+		Storage::disk('public')->put($imageName, base64_decode($image));
+
+        DB::table('users')
+          ->where('id', $id)
+          ->update([
+             'profile_picture_url' => 'http://127.0.0.1:8000' . '/storage/' . $imageName
+          ]);
+
+          return response()->json([
+            'status' => true,
+            'message' => 'Profile picture uploaded successfully.',
+        ], 201);
+	}
 }
