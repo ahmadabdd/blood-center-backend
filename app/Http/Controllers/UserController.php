@@ -584,4 +584,5 @@ class UserController extends Controller {
             'message' => 'Profile picture uploaded successfully.',
         ], 201);
 	}
+    
 }
