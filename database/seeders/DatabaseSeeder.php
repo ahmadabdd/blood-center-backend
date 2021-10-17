@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             "email"=> "ahmad@gmail.com",
             "password"=> bcrypt("ahmad123"),
             "city_id"=> "7",
-            "profile_picture_url" => "http://blood-center.tk/storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
         ]);
 
         User::insert([
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             "email"=> "nader@gmail.com",
             "password"=> bcrypt("nader123"),
             "city_id"=> "3",
-            "profile_picture_url" => "http://blood-center.tk/storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
         ]);
 
         User::insert([
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             "email"=> "abdullah@gmail.com",
             "password"=> bcrypt("abdullah123"),
             "city_id"=> "2",
-            "profile_picture_url" => "http://blood-center.tk/storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
         ]);
 
         User::insert([
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             "email"=> "ranim@gmail.com",
             "password"=> bcrypt("ranim123"),
             "city_id"=> "1",
-            "profile_picture_url" => "http://blood-center.tk/storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
         ]);
 
 
