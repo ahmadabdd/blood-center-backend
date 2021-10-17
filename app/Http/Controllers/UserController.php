@@ -564,7 +564,7 @@ class UserController extends Controller {
     }
 
     // run php artisan storage:link when testing
-	public function upload_image(Request $request){
+	public function upload_image(Request $request) {
 		$id = JWTAuth::user()->id;
 		$image = $request->profile_picture_url;  
 
@@ -576,7 +576,7 @@ class UserController extends Controller {
         DB::table('users')
           ->where('id', $id)
           ->update([
-             'profile_picture_url' => 'http://127.0.0.1:8000' . '/storage/' . $imageName
+             'profile_picture_url' => env('APP_URL') . 'storage/' . $imageName
           ]);
 
           return response()->json([
@@ -584,5 +584,5 @@ class UserController extends Controller {
             'message' => 'Profile picture uploaded successfully.',
         ], 201);
 	}
-    
+
 }
