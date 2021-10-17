@@ -52,6 +52,7 @@ class AuthController extends Controller {
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
             'city_id' => 'required|integer',
+            'firebase_token' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -61,17 +62,40 @@ class AuthController extends Controller {
             ), 400);
         }
 
-        $user = User::create(array_merge(
-            $validator->validated(),
-            ['password' => bcrypt($request->password),
-             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]
-        ));
+        // $user = User::create(array_merge(
+        //     $validator->validated(),
+        //     ['password' => bcrypt($request->password),
+        //      'firebase_token' => $request->firebase_token,
+        //      'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        //      'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        //     ]
+        // ));
 
+        // $user = new User;
+        // $user->first_name =$request->first_name;
+        // $user->last_name =$request->last_name;
+        // $user->email =$request->email;
+        // $user->password = bcrypt($request->password);
+        // $user->city_id = $request->city_id;
+        // $user->firebase_token = $request->firebase_token;
+        // $user->created_at = Carbon::now()->format('Y-m-d H:i:s');
+        // $user->updated_at = Carbon::now()->format('Y-m-d H:i:s');
         
+        $user = User::insert([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'city_id' => $request->city_id,
+            'firebase_token' => $request->firebase_token,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        
+        $user_id = User::where('email', $request->email)->get('id');
+
         Health_record::insert([
-            'user_id' => $user->id,
+            'user_id' => $user_id[0]->id,
             'blood_type_id' => null,
             'date_of_birth' => null,
             'last_donation' => null,

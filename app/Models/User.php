@@ -34,7 +34,8 @@ class User extends Authenticatable implements JWTSubject // Added here
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'firebase_token',
+        'remember_token'
     ];
 
     /**

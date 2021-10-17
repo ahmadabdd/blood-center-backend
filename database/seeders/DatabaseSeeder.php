@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             "last_name"=> "Abd",
             "email"=> "ahmad@gmail.com",
             "password"=> bcrypt("ahmad123"),
-            "city_id"=> "7"
+            "city_id"=> "7",
         ]);
 
         User::insert([
