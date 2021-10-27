@@ -29,7 +29,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('get_hospitals', [UserController::class, 'get_hospitals'])->name('api:get_hospitals');
     Route::get('get_notifications', [UserController::class, 'get_notifications'])->name('api:get_notifications');
     Route::get('get_user_donations', [UserController::class, 'get_user_donations'])->name('api:get_user_donations');
-    Route::get('get_request_data', [UserController::class, 'get_request_data'])->name('api:get_request_data');
     Route::post('get_all_requests', [UserController::class, 'get_all_requests'])->name('api:get_all_requests');
     Route::get('get_user_requests', [UserController::class, 'get_user_requests'])->name('api:get_user_requests');
     Route::get('get_user_requests_fulfilled', [UserController::class, 'get_user_requests_fulfilled'])->name('api:get_user_requests_fulfilled');
@@ -49,4 +48,5 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('get_chats', [UserController::class, 'get_chats'])->name('api:get_chats');
     Route::post('send_message', [UserController::class, 'send_message'])->name('api:send_message');
     Route::post('upload_image', [UserController::class, 'upload_image'])->name('api:upload_image');
+    Route::post('get_request_data', [UserController::class, 'get_request_data'])->name('api:get_request_data');
 });

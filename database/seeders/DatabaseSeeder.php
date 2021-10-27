@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Config;
 
 use App\Models\User;
 use App\Models\Blood_type;
@@ -31,7 +32,7 @@ class DatabaseSeeder extends Seeder
             "email"=> "ahmad@gmail.com",
             "password"=> bcrypt("ahmad123"),
             "city_id"=> "7",
-            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
         ]);
 
         User::insert([
@@ -40,7 +41,7 @@ class DatabaseSeeder extends Seeder
             "email"=> "nader@gmail.com",
             "password"=> bcrypt("nader123"),
             "city_id"=> "3",
-            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
         ]);
 
         User::insert([
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
             "email"=> "abdullah@gmail.com",
             "password"=> bcrypt("abdullah123"),
             "city_id"=> "2",
-            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
         ]);
 
         User::insert([
@@ -58,14 +59,14 @@ class DatabaseSeeder extends Seeder
             "email"=> "ranim@gmail.com",
             "password"=> bcrypt("ranim123"),
             "city_id"=> "1",
-            "profile_picture_url" => "http://3.133.20.22//storage/zUqM11S7eIRt.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
         ]);
 
 
         // Health_record seeders
         Health_record::insert([
             "user_id" => 1,
-            "blood_type_id" => 1,
+            "blood_type_id" => 5,
             "date_of_birth" => "1998-07-11",
             "last_donation" => "2021-08-18",
             "is_available" => 1,
@@ -75,7 +76,7 @@ class DatabaseSeeder extends Seeder
 
         Health_record::insert([
             "user_id" => 2,
-            "blood_type_id" => 2,
+            "blood_type_id" => 3,
             "date_of_birth" => "1999-07-11",
             "last_donation" => "2020-03-20",
             "is_available" => 1,
@@ -85,17 +86,17 @@ class DatabaseSeeder extends Seeder
 
         Health_record::insert([
             "user_id" => 3,
-            "blood_type_id" => 3,
+            "blood_type_id" => 6,
             "date_of_birth" => "1999-01-01",
             "last_donation" => "2021-04-05",
-            "is_available" => 0,
-            "is_smoker" => 1,
+            "is_available" => 1,
+            "is_smoker" => 0,
             "have_tattoo" => 0,
         ]);
 
         Health_record::insert([
             "user_id" => 4,
-            "blood_type_id" => 4,
+            "blood_type_id" => 8,
             "date_of_birth" => "1999-04-04",
             "last_donation" => "2019-04-21",
             "is_available" => 1,
@@ -250,32 +251,32 @@ class DatabaseSeeder extends Seeder
         // Blood_request seeders
         Blood_request::insert([
             "user_id" => 1,
-            "blood_type_id" => 1,
+            "blood_type_id" => 2,
             "city_id" => 7,
-            "hospital_id" => 1,
+            "hospital_id" => 8,
             "number_of_units" => 1,
             "left_number_of_units" => 1,
-            "expiry_date" => "2021-10-20",
+            "expiry_date" => "2021-11-20",
             "is_closed" => 0,
         ]);
 
         Blood_request::insert([
             "user_id" => 2,
-            "blood_type_id" => 2,
+            "blood_type_id" => 4,
             "city_id" => 3,
-            "hospital_id" => 3,
+            "hospital_id" => 4,
             "number_of_units" => 1,
             "left_number_of_units" => 1,
-            "expiry_date" => "2021-10-20",
+            "expiry_date" => "2021-10-24",
             "is_closed" => 0,
         ]);
 
         Blood_request::insert([
             "user_id" => 3,
-            "blood_type_id" => 3,
+            "blood_type_id" => 6,
             "city_id" => 2,
-            "hospital_id" => 4,
-            "number_of_units" => 1,
+            "hospital_id" => 5,
+            "number_of_units" => 2,
             "left_number_of_units" => 1,
             "expiry_date" => "2021-10-20",
             "is_closed" => 0,
@@ -283,9 +284,9 @@ class DatabaseSeeder extends Seeder
 
         Blood_request::insert([
             "user_id" => 4,
-            "blood_type_id" => 4,
-            "city_id" => 1,
-            "hospital_id" => 3,
+            "blood_type_id" => 8,
+            "city_id" => 9,
+            "hospital_id" => 9,
             "number_of_units" => 1,
             "left_number_of_units" => 1,
             "expiry_date" => "2021-10-20",
@@ -294,27 +295,27 @@ class DatabaseSeeder extends Seeder
 
         // Donation seeders
         Donation::insert([
-            "user_id" => 1,
-            "blood_request_id" => 2,
-            "is_accepted" => 0
+            // "user_id" => 1,
+            // "blood_request_id" => 2,
+            // "is_accepted" => 0
         ]);
 
         Donation::insert([
-            "user_id" => 2,
-            "blood_request_id" => 2,
-            "is_accepted" => 0
+            // "user_id" => 2,
+            // "blood_request_id" => 2,
+            // "is_accepted" => 0
         ]);
 
         Donation::insert([
-            "user_id" => 3,
-            "blood_request_id" => 3,
-            "is_accepted" => 0
+            // "user_id" => 3,
+            // "blood_request_id" => 3,
+            // "is_accepted" => 0
         ]);
 
         Donation::insert([
-            "user_id" => 4,
-            "blood_request_id" => 4,
-            "is_accepted" => 0
+            // "user_id" => 4,
+            // "blood_request_id" => 4,
+            // "is_accepted" => 0
         ]);
 
         // Connection seeders
@@ -376,22 +377,28 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Notification seeders
-        Notification::insert([
-            'user_id' => 2,
-            'header' => 'New A+ request!',
-            'body' => 'Would you like to donate?'
-        ]); 
+        // Notification::insert([
+        //     'sender' => 1,
+        //     'receiver' => 2,
+        //     'blood_request_id' => 2,
+        //     'header' => 'New A+ request!',
+        //     'body' => 'Would you like to donate?'
+        // ]); 
 
-        Notification::insert([
-            'user_id' => 1,
-            'header' => 'New AB+ request!',
-            'body' => 'Would you like to donate?'
-        ]);
+        // Notification::insert([
+        //     'sender' => 2,
+        //     'receiver' => 1,
+        //     'blood_request_id' => 3,
+        //     'header' => 'New AB+ request!',
+        //     'body' => 'Would you like to donate?'
+        // ]);
 
-        Notification::insert([
-            'user_id' => 1,
-            'header' => 'New donor!',
-            'body' => 'New donor has accepted your blood request.'
-        ]);
+        // Notification::insert([
+        //     'sender' => 1,
+        //     'receiver' => 2,
+        //     'blood_request_id' => 2,
+        //     'header' => 'New donor!',
+        //     'body' => 'Ahmad Abd has accepted your blood request.'
+        // ]);
     }
 }

@@ -66,7 +66,7 @@ class CreateUsersTable extends Migration
             $table->id();
 			$table->integer('user_id');
             $table->integer('blood_request_id');	
-            $table->boolean('is_accepted');
+            $table->integer('is_accepted');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 			$table->softDeletes();
@@ -103,7 +103,9 @@ class CreateUsersTable extends Migration
 
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('sender');
+            $table->integer('receiver');
+            $table->integer('blood_request_id')->nullable();
 			$table->string('header');
 			$table->string('body');
             $table->timestamp('created_at')->useCurrent();

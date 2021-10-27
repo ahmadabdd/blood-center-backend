@@ -8,7 +8,7 @@ use App\Models\Health_record;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use Config;
 
 use JWTAuth;
 
@@ -60,26 +60,7 @@ class AuthController extends Controller {
                 "status" => false,
                 "errors" => $validator->errors()
             ), 400);
-        }
-
-        // $user = User::create(array_merge(
-        //     $validator->validated(),
-        //     ['password' => bcrypt($request->password),
-        //      'firebase_token' => $request->firebase_token,
-        //      'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        //      'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        //     ]
-        // ));
-
-        // $user = new User;
-        // $user->first_name =$request->first_name;
-        // $user->last_name =$request->last_name;
-        // $user->email =$request->email;
-        // $user->password = bcrypt($request->password);
-        // $user->city_id = $request->city_id;
-        // $user->firebase_token = $request->firebase_token;
-        // $user->created_at = Carbon::now()->format('Y-m-d H:i:s');
-        // $user->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+        }                                       
         
         $user = User::insert([
             'first_name' => $request->first_name,
@@ -88,6 +69,7 @@ class AuthController extends Controller {
             'password' => bcrypt($request->password),
             'city_id' => $request->city_id,
             'firebase_token' => $request->firebase_token,
+            'profile_picture_url' => Config::get('APP_URL') . 'storage/' . "facebook-default-photo-male_1-1.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
