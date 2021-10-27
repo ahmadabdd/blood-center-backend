@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('set_available', [UserController::class, 'set_available'])->name('api:set_available');
     Route::get('set_unavailable', [UserController::class, 'set_unavailable'])->name('api:set_unavailable');
     Route::get('get_chats', [UserController::class, 'get_chats'])->name('api:get_chats');
-    Route::post('get_request_data', [UserController::class, 'get_request_data'])->name('api:get_request_data');
     Route::post('send_message', [UserController::class, 'send_message'])->name('api:send_message');
     Route::post('upload_image', [UserController::class, 'upload_image'])->name('api:upload_image');
+    Route::post('get_request_data', [UserController::class, 'get_request_data'])->name('api:get_request_data');
 });

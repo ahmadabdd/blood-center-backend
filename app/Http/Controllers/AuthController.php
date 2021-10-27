@@ -31,7 +31,7 @@ class AuthController extends Controller {
 		try{
 			if(!$token = JWTAuth::attempt($validator->validated())){
 				return response()->json(array(
-					"status" => 'KO',
+					"status" => false,
 					"errors" => 'Invalid Credentials!'
 				), 401);
 				}
@@ -41,7 +41,11 @@ class AuthController extends Controller {
 		
 		$user = JWTAuth::user();
 		$user->token = $token;
-		return json_encode($user);
+		return response()->json([
+            'status' => true,
+            'message' => 'User successfully registered',
+            'user' => $user
+        ], 201);
 	}
 
 
