@@ -104,7 +104,7 @@ class UserController extends Controller {
         return $notifications;
     }
 
-    public function get_all_requests(Request $request) {
+    public function get_all_requests(Request $request) {    
 
         if($request->has('blood_type_id')) {
             $blood_type_id = $request->blood_type_id;
