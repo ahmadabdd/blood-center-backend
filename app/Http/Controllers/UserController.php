@@ -350,10 +350,6 @@ class UserController extends Controller {
         $blood_type_id = Blood_type::where('id', $request->blood_type)->get();
         $blood_type = $blood_type_id[0]->type;
 
-        for($i = 0; $i < count($health_records); $i++) {
-            $user_ids[] = $health_records[$i]->user_id;
-        }
-        
         $blood_request = new Blood_request();
         $blood_request->user_id = $id;
         $blood_request->blood_type_id = $request->blood_type;
@@ -367,15 +363,21 @@ class UserController extends Controller {
 
         $blood_request_id = $blood_request->id;
 
-        for($i = 0; $i < count($user_ids); $i++) {
-            Notification::insert([
-                'sender' => $id,
-                'receiver' => $user_ids[$i],
-                'blood_request_id' => $blood_request_id,
-                'header' => 'New ' . $blood_type . ' Request',
-                'body' => 'Would you like to donate?',
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]);
+        if(count($health_records) > 0) {
+            for($i = 0; $i < count($health_records); $i++) {
+                $user_ids[] = $health_records[$i]->user_id;
+            }
+
+            for($i = 0; $i < count($user_ids); $i++) {
+                Notification::insert([
+                    'sender' => $id,
+                    'receiver' => $user_ids[$i],
+                    'blood_request_id' => $blood_request_id,
+                    'header' => 'New ' . $blood_type . ' Request',
+                    'body' => 'Would you like to donate?',
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+                ]);
+            }
         }
       
         return response()->json([
