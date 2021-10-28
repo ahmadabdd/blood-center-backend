@@ -44,7 +44,7 @@ class AuthController extends Controller {
         $health_record = Health_record::where('user_id', $user->id)->get();
         $is_available = $health_record[0]->is_available;
         $user['is_available'] = $is_available;
-        
+
 		return response()->json([
             'status' => true,
             'message' => 'User successfully registered',
@@ -86,9 +86,9 @@ class AuthController extends Controller {
 
         Health_record::insert([
             'user_id' => $user_id[0]->id,
-            'blood_type_id' => null,
-            'date_of_birth' => null,
-            'last_donation' => null,
+            'blood_type_id' => "-",
+            'date_of_birth' => "-",
+            'last_donation' => "-",
             'is_available' => 0,
             'is_smoker' => null,
             'have_tattoo' => null,
