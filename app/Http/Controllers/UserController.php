@@ -442,6 +442,8 @@ class UserController extends Controller {
           ->update([
              'is_accepted' => 2
           ]);
+
+        
                            
         return response()->json([
         'status' => true,
