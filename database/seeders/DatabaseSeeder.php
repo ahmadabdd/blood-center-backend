@@ -251,7 +251,7 @@ class DatabaseSeeder extends Seeder
         Hospital::insert([
             "name" => "Cleamenceau",
             "city_id" => "1",
-            "33.898185257086276",
+            "long" => "33.898185257086276",
             "lat" => "35.49007782548146"
         ]);
         Hospital::insert([
@@ -326,7 +326,6 @@ class DatabaseSeeder extends Seeder
             "long" => "33.86010250707405",
             "lat" => "35.523922827788425"
         ]);
-        
         Hospital::insert([
             "name" => "Bchamoun Hospital",
             "city_id" => "7",
@@ -380,87 +379,87 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // Donation seeders
-        Donation::insert([
-            // "user_id" => 1,
-            // "blood_request_id" => 2,
-            // "is_accepted" => 0
-        ]);
+        // Donation::insert([
+        //     "user_id" => 1,
+        //     "blood_request_id" => 2,
+        //     "is_accepted" => 0
+        // ]);
 
-        Donation::insert([
-            // "user_id" => 2,
-            // "blood_request_id" => 2,
-            // "is_accepted" => 0
-        ]);
+        // Donation::insert([
+        //     "user_id" => 2,
+        //     "blood_request_id" => 2,
+        //     "is_accepted" => 0
+        // ]);
 
-        Donation::insert([
-            // "user_id" => 3,
-            // "blood_request_id" => 3,
-            // "is_accepted" => 0
-        ]);
+        // Donation::insert([
+        //     // "user_id" => 3,
+        //     // "blood_request_id" => 3,
+        //     // "is_accepted" => 0
+        // ]);
 
-        Donation::insert([
-            // "user_id" => 4,
-            // "blood_request_id" => 4,
-            // "is_accepted" => 0
-        ]);
+        // Donation::insert([
+        //     // "user_id" => 4,
+        //     // "blood_request_id" => 4,
+        //     // "is_accepted" => 0
+        // ]);
 
-        // Connection seeders
-        Connection::insert([
-            "user_id1" => 1,
-            "user_id2" => 2
-        ]);
+        // // Connection seeders
+        // Connection::insert([
+        //     "user_id1" => 1,
+        //     "user_id2" => 2
+        // ]);
         
-        Connection::insert([
-            "user_id1" => 2,
-            "user_id2" => 1
-        ]);
+        // Connection::insert([
+        //     "user_id1" => 2,
+        //     "user_id2" => 1
+        // ]);
 
-        Connection::insert([
-            "user_id1" => 1,
-            "user_id2" => 3
-        ]);
+        // Connection::insert([
+        //     "user_id1" => 1,
+        //     "user_id2" => 3
+        // ]);
 
-        Connection::insert([
-            "user_id1" => 3,
-            "user_id2" => 1
-        ]);
+        // Connection::insert([
+        //     "user_id1" => 3,
+        //     "user_id2" => 1
+        // ]);
 
 
         // Message seeders
-        Message::insert([
-            "connection_id" => 1,
-            "sender_id" => 1,
-            "receiver_id" => 2,
-            "message_body" => "Hi Nader! how are you?"
-        ]);
+        // Message::insert([
+        //     "connection_id" => 1,
+        //     "sender_id" => 1,
+        //     "receiver_id" => 2,
+        //     "message_body" => "Hi Nader! how are you?"
+        // ]);
 
-        Message::insert([
-            "connection_id" => 1,
-            "sender_id" => 2,
-            "receiver_id" => 1,
-            "message_body" => "Hello Ahmad! I'm good?"
-        ]);
+        // Message::insert([
+        //     "connection_id" => 1,
+        //     "sender_id" => 2,
+        //     "receiver_id" => 1,
+        //     "message_body" => "Hello Ahmad! I'm good?"
+        // ]);
 
-        Message::insert([
-            "connection_id" => 1,
-            "sender_id" => 1,
-            "receiver_id" => 2,
-            "message_body" => "Are you coming to donate today?"
-        ]);
+        // Message::insert([
+        //     "connection_id" => 1,
+        //     "sender_id" => 1,
+        //     "receiver_id" => 2,
+        //     "message_body" => "Are you coming to donate today?"
+        // ]);
 
-        Message::insert([
-            "connection_id" => 1,
-            "sender_id" => 2,
-            "receiver_id" => 1,
-            "message_body" => "Yes sure! I'll be there by 12pm"
-        ]);
+        // Message::insert([
+        //     "connection_id" => 1,
+        //     "sender_id" => 2,
+        //     "receiver_id" => 1,
+        //     "message_body" => "Yes sure! I'll be there by 12pm"
+        // ]);
 
-        Message::insert([
-            "connection_id" => 1,
-            "sender_id" => 1,
-            "receiver_id" => 2,
-            "message_body" => "Great! Seeya"
-        ]);
+        // Message::insert([
+        //     "connection_id" => 1,
+        //     "sender_id" => 1,
+        //     "receiver_id" => 2,
+        //     "message_body" => "Great! Seeya"
+        // ]);
 
         // Notification seeders
         // Notification::insert([
