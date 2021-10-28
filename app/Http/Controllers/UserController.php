@@ -396,7 +396,7 @@ class UserController extends Controller {
               'is_accepted' => 0
           ]);
 
-        $receiver = Blood_request::where("id", $request->blood_request_id)->get();
+        $receiver = Donation::where("id", $request->blood_request_id)->get();
         $receiver_id = $receiver[0]->user_id;
 
         $user_data = User::where('id', $receiver_id)->get();
@@ -429,7 +429,7 @@ class UserController extends Controller {
              'is_accepted' => 1
           ]);
 
-        $receiver = Blood_request::where("id", $request->blood_request_id)->get();
+        $receiver = Donation::where("id", $request->blood_request_id)->get();
         $receiver_id = $receiver[0]->user_id;
 
         $user_data = User::where('id', $receiver_id)->get();
@@ -447,11 +447,6 @@ class UserController extends Controller {
                            
         return response()->json([
         'status' => true,
-        'message' => 'Donation request declined.',
-        ], 201);
-                           
-        return response()->json([
-        'status' => true,
         'message' => 'Donation request accepted.',
         ], 201);
     }
@@ -466,7 +461,7 @@ class UserController extends Controller {
              'is_accepted' => 2
           ]);
 
-          $receiver = Blood_request::where("id", $request->blood_request_id)->get();
+          $receiver = Donation::where("id", $request->blood_request_id)->get();
           $receiver_id = $receiver[0]->user_id;
   
           $user_data = User::where('id', $receiver_id)->get();
