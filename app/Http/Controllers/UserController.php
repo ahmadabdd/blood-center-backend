@@ -397,7 +397,7 @@ class UserController extends Controller {
         $receiver = Blood_request::where("id", $request->blood_request_id)->get();
         $receiver_id = $receiver[0]->user_id;
 
-        $user_data = User::where('id', $id)->get();
+        $user_data = User::where('id', $receiver_id)->get();
         $user_first_name = $user_data[0]->first_name;
         $user_last_name = $user_data[0]->last_name;
 
@@ -430,7 +430,7 @@ class UserController extends Controller {
         $receiver = Blood_request::where("id", $request->blood_request_id)->get();
         $receiver_id = $receiver[0]->user_id;
 
-        $user_data = User::where('id', $id)->get();
+        $user_data = User::where('id', $receiver_id)->get();
         $user_first_name = $user_data[0]->first_name;
         $user_last_name = $user_data[0]->last_name;
 
@@ -467,7 +467,7 @@ class UserController extends Controller {
           $receiver = Blood_request::where("id", $request->blood_request_id)->get();
           $receiver_id = $receiver[0]->user_id;
   
-          $user_data = User::where('id', $id)->get();
+          $user_data = User::where('id', $receiver_id)->get();
           $user_first_name = $user_data[0]->first_name;
           $user_last_name = $user_data[0]->last_name;
   
