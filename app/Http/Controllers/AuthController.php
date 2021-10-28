@@ -41,6 +41,10 @@ class AuthController extends Controller {
 		
 		$user = JWTAuth::user();
 		$user->token = $token;
+        $health_record = Health_record::where('user_id', $user->id)->get();
+        $is_available = $health_record[0]->is_available;
+        $user['is_available'] = $is_available;
+        
 		return response()->json([
             'status' => true,
             'message' => 'User successfully registered',
@@ -85,7 +89,7 @@ class AuthController extends Controller {
             'blood_type_id' => null,
             'date_of_birth' => null,
             'last_donation' => null,
-            'is_available' => null,
+            'is_available' => 0,
             'is_smoker' => null,
             'have_tattoo' => null,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
