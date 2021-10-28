@@ -426,6 +426,27 @@ class UserController extends Controller {
           ->update([
              'is_accepted' => 1
           ]);
+
+        $receiver = Blood_request::where("id", $request->blood_request_id)->get();
+        $receiver_id = $receiver[0]->user_id;
+
+        $user_data = User::where('id', $id)->get();
+        $user_first_name = $user_data[0]->first_name;
+        $user_last_name = $user_data[0]->last_name;
+
+        DB::table('notifications')
+        ->insert([
+            'sender' => $id,
+            'receiver' => $receiver_id,
+            'header' => 'Request Accepted',
+            'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your request',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+                           
+        return response()->json([
+        'status' => true,
+        'message' => 'Donation request declined.',
+        ], 201);
                            
         return response()->json([
         'status' => true,
@@ -443,7 +464,21 @@ class UserController extends Controller {
              'is_accepted' => 2
           ]);
 
-        
+          $receiver = Blood_request::where("id", $request->blood_request_id)->get();
+          $receiver_id = $receiver[0]->user_id;
+  
+          $user_data = User::where('id', $id)->get();
+          $user_first_name = $user_data[0]->first_name;
+          $user_last_name = $user_data[0]->last_name;
+  
+          DB::table('notifications')
+          ->insert([
+              'sender' => $id,
+              'receiver' => $receiver_id,
+              'header' => 'Request Declined',
+              'body' => $user_first_name . ' ' . $user_last_name . ' has declined your request',
+              'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+          ]);
                            
         return response()->json([
         'status' => true,
