@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Health_record;
+use App\Models\City;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -43,11 +44,19 @@ class AuthController extends Controller {
 		$user->token = $token;
         $health_record = Health_record::where('user_id', $user->id)->get();
         $is_available = $health_record[0]->is_available;
+        
+
+        $city_data = City::where('id', $user->city_id)->get();
+        $long = $city_data[0]->long;
+        $lat = $city_data[0]->lat;
+
         $user['is_available'] = $is_available;
+        $user['long'] = $long;
+        $user['lat'] = $lat;
 
 		return response()->json([
             'status' => true,
-            'message' => 'User successfully registered',
+            'message' => 'User successfully logged in',
             'user' => $user
         ], 201);
 	}

@@ -162,61 +162,61 @@ class DatabaseSeeder extends Seeder
         9- Baabda 33.83919858833566, 35.54171205234172
         10- Nabatieh 33.37758655008111, 35.484317387428504
         */
-        City::insert([
+        City::insert([//1
             "name" => "Beirut",
             "long" => "33.895094962662675",
             "lat" => "35.50316943278384"
         ]);
 
-        City::insert([
+        City::insert([//2
             "name" => "Tripoli",
             "long" => "34.433784047086554",
             "lat" => "35.83747600954299"
         ]);
 
-        City::insert([
+        City::insert([//3
             "name" => "Saida",
             "long" => "33.547056441601306",
             "lat" => "35.37094717630806"
         ]);
 
-        City::insert([
+        City::insert([//4
             "name" => "Byblos",
             "long" => "34.12677632074071",
             "lat" => "35.65062899202389"
         ]);
 
-        City::insert([
+        City::insert([//5
             "name" => "Zahle",
             "long" => "33.85150982172688",
             "lat" => "35.89527702193855"
         ]);
 
-        City::insert([
+        City::insert([//6
             "name" => "Tyre",
             "long" => "33.2526827791365", 
             "lat" => "35.207236433311735"
         ]);
 
-        City::insert([
+        City::insert([//7
             "name" => "Mount Lebanon",
             "long" => "33.86162526581892",
             "lat" => "35.52186809196221"
         ]);
 
-        City::insert([
+        City::insert([//8
             "name" => "Baalbak",
             "long" => "34.01976543467678", 
             "lat" => "36.2177470222216"
         ]);
 
-        City::insert([
+        City::insert([//9
             "name" => "Baabda",
             "long" => "33.83919858833566", 
             "lat" => "35.54171205234172" 
         ]);
 
-        City::insert([
+        City::insert([//10
             "name" => "Nabatieh",
             "long" => "33.37758655008111", 
             "lat" => "35.484317387428504" 
@@ -242,91 +242,91 @@ class DatabaseSeeder extends Seeder
         15- St. Georges Hospital 33.83754952099413, 35.526945957473586 *
         16- Bchamoun Hospital 33.783633212262714, 35.52332864213094
         */
-        Hospital::insert([
+        Hospital::insert([//1
             "name" => "AUBMC",
             "city_id" => "1",
             "long" => "33.89794103720954",
             "lat" => "35.48581257502805"
         ]);
-        Hospital::insert([
+        Hospital::insert([//2
             "name" => "Cleamenceau",
             "city_id" => "1",
             "long" => "33.898185257086276",
             "lat" => "35.49007782548146"
         ]);
-        Hospital::insert([
+        Hospital::insert([//3
             "name" => "Najjar Hospital",
             "city_id" => "1",
             "long" => "33.89702378836769",
             "lat" => "35.48674598368463"
         ]);
-        Hospital::insert([
+        Hospital::insert([//4
             "name" => "Trad Hospital",
             "city_id" => "1",
             "long" => "33.897041599125465",
             "lat" => "35.4918099941707"
         ]);
-        Hospital::insert([
+        Hospital::insert([//5
             "name" => "St. Georges Hospital",
             "city_id" => "1",
             "long" => "33.83754952099413",
             "lat" => "35.526945957473586"
         ]);
-        Hospital::insert([ 
+        Hospital::insert([//6
             "name" => "Rizk Hospital", 
             "city_id" => "1",
             "long" => "33.88612661009286",
             "lat" => "35.51484561276833"
         ]);
-        Hospital::insert([
+        Hospital::insert([//7
             "name" => "Rafic Hariri Hospital",
             "city_id" => "1",
             "long" => "33.86437883052882",
             "lat" => "35.49147882912746"
         ]);
-        Hospital::insert([
+        Hospital::insert([//8
             "name" => "Saida Hospital",
             "city_id" => "3", 
             "long" => "33.546336544647005",
             "lat" => "35.381781901628386"
         ]);
-        Hospital::insert([
+        Hospital::insert([//9
             "name" => "Tripoli Hospital",
             "city_id" => "2",
             "long" => "34.43818448033412",
             "lat" => "35.85999664800973"
         ]);
-        Hospital::insert([
+        Hospital::insert([//10
             "name" => "Haykal Hospital",
             "city_id" => "2",
             "long" => "34.4132645736662",
             "lat" => "35.83177320060943"
         ]);
-        Hospital::insert([
+        Hospital::insert([//11
             "name" => "Al Salam Hospital", 
             "city_id" => "2",
             "long" => "34.42222651674446",
             "lat" => "35.827160649733486"
         ]);
-        Hospital::insert([
+        Hospital::insert([//12
             "name" => "Baalbak Hospital",
             "city_id" => "8",
             "long" => "33.99935939739805",
             "lat" => "36.213727355195736"
         ]);
-        Hospital::insert([
+        Hospital::insert([//13
             "name" => "Hiram Hospital",
             "city_id" => "6",
             "long" => "33.282584370569836",
             "lat" => "35.22264276122027"
         ]);
-        Hospital::insert([
+        Hospital::insert([//14
             "name" => "Mount Lebanon Hospital",
             "city_id" => "7",
             "long" => "33.86010250707405",
             "lat" => "35.523922827788425"
         ]);
-        Hospital::insert([
+        Hospital::insert([//15
             "name" => "Bchamoun Hospital",
             "city_id" => "7",
             "long" => "33.783633212262714",
