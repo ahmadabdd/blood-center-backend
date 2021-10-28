@@ -598,7 +598,7 @@ class UserController extends Controller {
           ->where('id', $id)
           ->update([
             //  'profile_picture_url' => Config::get('APP_URL') . 'storage/' . $imageName
-             'profile_picture_url' => "https://blood-center/storage/" . $imageName
+             'profile_picture_url' => "https://blood-center.tk/storage/" . $imageName
           ]);
 
           return response()->json([
