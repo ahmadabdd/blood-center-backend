@@ -396,7 +396,7 @@ class UserController extends Controller {
               'is_accepted' => 0
           ]);
 
-        $receiver = Donation::where("id", $request->blood_request_id)->get();
+        $receiver = Blood_request::where("id", $request->blood_request_id)->get();
         $receiver_id = $receiver[0]->user_id;
 
         $user_data = User::where('id', $id)->get();
@@ -412,7 +412,7 @@ class UserController extends Controller {
             'body' => $user_first_name . ' ' . $user_last_name . ' is ready to donate!',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-
+        
         return response()->json([
         'status' => true,
         'message' => 'Donation request sent successfully.',
@@ -429,7 +429,7 @@ class UserController extends Controller {
              'is_accepted' => 1
           ]);
 
-        $receiver = Donation::where("id", $request->blood_request_id)->get();
+        $receiver = Donation::where("blood_request_id", $request->blood_request_id)->get();
         $receiver_id = $receiver[0]->user_id;
 
         $user_data = User::where('id', $id)->get();
@@ -438,8 +438,8 @@ class UserController extends Controller {
 
         DB::table('notifications')
         ->insert([
-            'sender' => $receiver_id,
-            'receiver' => $id,
+            'sender' => $id,
+            'receiver' => $receiver_id,
             'header' => 'Request Accepted',
             'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your request',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -461,7 +461,7 @@ class UserController extends Controller {
              'is_accepted' => 2
           ]);
 
-          $receiver = Donation::where("id", $request->blood_request_id)->get();
+          $receiver = Donation::where("blood_request_id", $request->blood_request_id)->get();
           $receiver_id = $receiver[0]->user_id;
   
           $user_data = User::where('id', $id)->get();
@@ -470,8 +470,8 @@ class UserController extends Controller {
   
           DB::table('notifications')
           ->insert([
-              'sender' => $receiver_id,
-              'receiver' => $id,
+              'sender' => $id,
+              'receiver' => $receiver_id,
               'header' => 'Request Declined',
               'body' => $user_first_name . ' ' . $user_last_name . ' has declined your request',
               'created_at' => Carbon::now()->format('Y-m-d H:i:s')
