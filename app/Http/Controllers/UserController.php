@@ -436,8 +436,8 @@ class UserController extends Controller {
 
         DB::table('notifications')
         ->insert([
-            'sender' => $id,
-            'receiver' => $receiver_id,
+            'sender' => $receiver_id,
+            'receiver' => $id,
             'header' => 'Request Accepted',
             'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your request',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -473,8 +473,8 @@ class UserController extends Controller {
   
           DB::table('notifications')
           ->insert([
-              'sender' => $id,
-              'receiver' => $receiver_id,
+              'sender' => $receiver_id,
+              'receiver' => $id,
               'header' => 'Request Declined',
               'body' => $user_first_name . ' ' . $user_last_name . ' has declined your request',
               'created_at' => Carbon::now()->format('Y-m-d H:i:s')
