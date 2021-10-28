@@ -75,12 +75,16 @@ class CreateUsersTable extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
 			$table->string('name');
+            $table->integer('long');
+            $table->integer('lat');
         });
 
         Schema::create('hospitals', function (Blueprint $table) {
             $table->id();
 			$table->string('name');
             $table->integer('city_id');
+            $table->integer('long');
+            $table->integer('lat');
         });
         
         Schema::create('connections', function (Blueprint $table) {

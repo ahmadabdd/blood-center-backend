@@ -441,7 +441,7 @@ class UserController extends Controller {
             'sender' => $id,
             'receiver' => $receiver_id,
             'header' => 'Request Accepted',
-            'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your request',
+            'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your donation',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
                            
@@ -473,7 +473,7 @@ class UserController extends Controller {
               'sender' => $id,
               'receiver' => $receiver_id,
               'header' => 'Request Declined',
-              'body' => $user_first_name . ' ' . $user_last_name . ' has declined your request',
+              'body' => $user_first_name . ' ' . $user_last_name . ' has declined your donation',
               'created_at' => Carbon::now()->format('Y-m-d H:i:s')
           ]);
                            
