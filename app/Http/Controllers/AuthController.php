@@ -95,9 +95,9 @@ class AuthController extends Controller {
 
         Health_record::insert([
             'user_id' => $user_id[0]->id,
-            'blood_type_id' => "-",
-            'date_of_birth' => "-",
-            'last_donation' => "-",
+            'blood_type_id' => null,
+            'date_of_birth' => null,
+            'last_donation' => null,
             'is_available' => 0,
             'is_smoker' => null,
             'have_tattoo' => null,
