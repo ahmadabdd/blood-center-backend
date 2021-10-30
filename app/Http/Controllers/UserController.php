@@ -387,21 +387,21 @@ class UserController extends Controller {
              'is_accepted' => 1
           ]);
 
-        // $receiver = Donation::where("blood_request_id", $request->blood_request_id)->get();
-        // $receiver_id = $receiver[0]->user_id;
+        $receiver = Donation::where("blood_request_id", $request->blood_request_id)->get();
+        $receiver_id = $receiver[0]->user_id;
 
-        // $user_data = User::where('id', $id)->get();
-        // $user_first_name = $user_data[0]->first_name;
-        // $user_last_name = $user_data[0]->last_name;
+        $user_data = User::where('id', $id)->get();
+        $user_first_name = $user_data[0]->first_name;
+        $user_last_name = $user_data[0]->last_name;
 
-        // DB::table('notifications')
-        // ->insert([
-        //     'sender' => $id,
-        //     'receiver' => $receiver_id,
-        //     'header' => 'Request Accepted',
-        //     'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your donation',
-        //     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-        // ]);
+        DB::table('notifications')
+        ->insert([
+            'sender' => $id,
+            'receiver' => $receiver_id,
+            'header' => 'Request Accepted',
+            'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your donation',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
                            
         return response()->json([
         'status' => true,
