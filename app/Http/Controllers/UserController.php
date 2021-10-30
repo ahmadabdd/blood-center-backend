@@ -297,6 +297,7 @@ class UserController extends Controller {
 
         $user_donations = DB::table('donations')
                                ->where('donations.user_id', $id)
+                               ->where('donations.is_accepted', 1)
                                ->join('users', 'donations.user_id', '=', 'users.id')
                                ->join('blood_requests', 'donations.blood_request_id', '=', 'blood_requests.id')
                                ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
