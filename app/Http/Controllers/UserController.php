@@ -109,53 +109,7 @@ class UserController extends Controller {
     }
 
     public function get_all_requests(Request $request) {    
-
-        if($request->has('blood_type_id')) {
-            $blood_type_id = $request->blood_type_id;
-            $requests = DB::table('blood_requests')
-            ->where('blood_requests.is_closed', 0)
-            ->where('blood_types.id', $blood_type_id)
-            ->join('users', 'blood_requests.user_id', '=', 'users.id')
-            ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
-            ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
-            ->join('hospitals', 'blood_requests.hospital_id', '=', 'hospitals.id')
-            ->select('blood_requests.id',
-                     'blood_requests.left_number_of_units',
-                     'blood_requests.expiry_date as expiry_date',
-                     'blood_types.type',
-                     'cities.name as city',
-                     'hospitals.name as hospital',
-                     'users.first_name',
-                     'users.last_name',
-                     'blood_requests.created_at')
-            ->orderBy('blood_requests.id'. 'desc')         
-            ->get();
-            return $requests;
-        } 
-        elseif($request->has('city_id')) {
-            $city_id = $request->city_id;
-            $requests = DB::table('blood_requests')
-            ->where('blood_requests.is_closed', 0)
-            ->where('cities.id', $city_id)
-            ->join('users', 'blood_requests.user_id', '=', 'users.id')
-            ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
-            ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
-            ->join('hospitals', 'blood_requests.hospital_id', '=', 'hospitals.id')
-            ->select('blood_requests.id',
-                     'blood_requests.left_number_of_units',
-                     'blood_requests.expiry_date',
-                     'blood_types.type',
-                     'cities.name as city',
-                     'hospitals.name as hospital',
-                     'users.first_name',
-                     'users.last_name',
-                     'blood_requests.created_at')
-            ->orderBy('blood_requests.created_at', 'desc')  
-            ->get();
-            return $requests;
-        } 
-        else {
-            $requests = DB::table('blood_requests')
+        $requests = DB::table('blood_requests')
             ->where('blood_requests.is_closed', 0)
             ->join('users', 'blood_requests.user_id', '=', 'users.id')
             ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
@@ -169,11 +123,12 @@ class UserController extends Controller {
                      'hospitals.name as hospital',
                      'users.first_name',
                      'users.last_name',
+                     'users.id as user_id',
                      'blood_requests.created_at')
             ->orderBy('blood_requests.created_at', 'asc')  
             ->get();
-        return $requests;
-        }
+            
+            return $requests;
 	}
 
     public function get_request_data(Request $request) {
@@ -390,7 +345,7 @@ class UserController extends Controller {
 
     public function make_donation(Request $request) {
         $id = JWTAuth::user()->id;
-
+        
         DB::table('donations')
           ->insert([
               'user_id' => $id,
@@ -423,29 +378,30 @@ class UserController extends Controller {
 
     public function accept_donation_request(Request $request) {
         $id = JWTAuth::user()->id;
+        $user_id = $request->user_id;
 
         DB::table('donations')
           ->where('blood_request_id', $request->blood_request_id)
-          ->where('user_id', $id)
+          ->where('user_id', $user_id)
           ->update([
              'is_accepted' => 1
           ]);
 
-        $receiver = Donation::where("blood_request_id", $request->blood_request_id)->get();
-        $receiver_id = $receiver[0]->user_id;
+        // $receiver = Donation::where("blood_request_id", $request->blood_request_id)->get();
+        // $receiver_id = $receiver[0]->user_id;
 
-        $user_data = User::where('id', $id)->get();
-        $user_first_name = $user_data[0]->first_name;
-        $user_last_name = $user_data[0]->last_name;
+        // $user_data = User::where('id', $id)->get();
+        // $user_first_name = $user_data[0]->first_name;
+        // $user_last_name = $user_data[0]->last_name;
 
-        DB::table('notifications')
-        ->insert([
-            'sender' => $id,
-            'receiver' => $receiver_id,
-            'header' => 'Request Accepted',
-            'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your donation',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        // DB::table('notifications')
+        // ->insert([
+        //     'sender' => $id,
+        //     'receiver' => $receiver_id,
+        //     'header' => 'Request Accepted',
+        //     'body' => $user_first_name . ' ' . $user_last_name . ' has accepted your donation',
+        //     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        // ]);
                            
         return response()->json([
         'status' => true,
@@ -455,10 +411,11 @@ class UserController extends Controller {
     
     public function decline_donation_request(Request $request) {
         $id = JWTAuth::user()->id;
+        $user_id = $request->user_id;
 
         DB::table('donations')
           ->where('blood_request_id', $request->blood_request_id)
-          ->where('user_id', $id)
+          ->where('user_id', $user_id)
           ->update([
              'is_accepted' => 2
           ]);
