@@ -61,6 +61,7 @@ use App\Models\Connection;
         8- Mount Lebanon Hospital
         9- Baabda Hospital
         */
+        
 class UserController extends Controller {
 
     // testing function. temp.
