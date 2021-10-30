@@ -640,8 +640,9 @@ class UserController extends Controller {
           ]);
 
           return response()->json([
-            'status' => true,
-            'message' => 'Profile picture uploaded successfully.',
+              'status' => true,
+              'message' => 'Profile picture uploaded successfully.',
+              'URL' => "https://blood-center.tk/storage/" . $imageName
         ], 201);
 	}
 
