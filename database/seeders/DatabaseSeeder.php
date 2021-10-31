@@ -32,7 +32,8 @@ class DatabaseSeeder extends Seeder
             "email"=> "ahmad@gmail.com",
             "password"=> bcrypt("ahmad123"),
             "city_id"=> "7",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
         ]);
 
         User::insert([
@@ -41,7 +42,8 @@ class DatabaseSeeder extends Seeder
             "email"=> "nader@gmail.com",
             "password"=> bcrypt("nader123"),
             "city_id"=> "3",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
         ]);
 
         User::insert([
@@ -50,7 +52,8 @@ class DatabaseSeeder extends Seeder
             "email"=> "abdullah@gmail.com",
             "password"=> bcrypt("abdullah123"),
             "city_id"=> "2",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
         ]);
 
         User::insert([
@@ -59,7 +62,8 @@ class DatabaseSeeder extends Seeder
             "email"=> "ranim@gmail.com",
             "password"=> bcrypt("ranim123"),
             "city_id"=> "1",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg"
+            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
         ]);
 
 
