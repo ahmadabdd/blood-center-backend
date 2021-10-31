@@ -216,7 +216,7 @@ class UserController extends Controller {
                                         'users.id as user_id' ,
                                         'users.first_name',
                                         'users.last_name',
-                                        'users.firbase_token',
+                                        'users.firebase_token',
                                         'users.profile_picture_url',
                                         'blood_types.type',
                                         'cities.name as city',
