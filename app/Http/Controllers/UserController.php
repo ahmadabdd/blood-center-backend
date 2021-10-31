@@ -346,12 +346,16 @@ class UserController extends Controller {
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ]);
             }
+            return response()->json([
+                'status' => true,
+                'message' => 'Request sent successfully.',
+                'tokens' => $tokens
+            ], 201);
         }
       
         return response()->json([
             'status' => true,
             'message' => 'Request sent successfully.',
-            'tokens' => $tokens
         ], 201);
     }
 
