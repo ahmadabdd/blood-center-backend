@@ -60,7 +60,9 @@ class AuthController extends Controller {
         $user['long'] = $long;
         $user['lat'] = $lat;
         $user['token_firebase'] = $firebase_token;
-        $user['blood_type'] = $blood_type[0]['type'];
+        if($blood_type_id) {
+            $user['blood_type'] = $blood_type[0]['type'];
+        }
 
 		return response()->json([
             'status' => true,
