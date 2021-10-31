@@ -123,6 +123,7 @@ class UserController extends Controller {
                      'hospitals.name as hospital',
                      'users.first_name',
                      'users.last_name',
+                     'users.firebase_token',
                      'users.id as user_id',
                      'blood_requests.created_at')
             ->orderBy('blood_requests.created_at', 'asc')  
@@ -147,6 +148,7 @@ class UserController extends Controller {
                      'hospitals.name as hospital',
                      'users.first_name',
                      'users.last_name',
+                     'users.firebase_token',
                      'blood_requests.created_at')
             ->get();
         return $request_data;
@@ -214,6 +216,7 @@ class UserController extends Controller {
                                         'users.id as user_id' ,
                                         'users.first_name',
                                         'users.last_name',
+                                        'users.firbase_token',
                                         'users.profile_picture_url',
                                         'blood_types.type',
                                         'cities.name as city',
@@ -325,6 +328,14 @@ class UserController extends Controller {
                 $user_ids[] = $health_records[$i]->user_id;
             }
 
+            for($i = 0; $i < count($user_ids) ; $i++) {
+                $users[] = DB::table('users')->where('id', $user_ids[$i])->get();
+            }
+
+            for($i = 0; $i < count($users) ; $i++) {
+                $tokens[] = $users[$i][0]->firebase_token;
+            }
+
             for($i = 0; $i < count($user_ids); $i++) {
                 Notification::insert([
                     'sender' => $id,
@@ -340,6 +351,7 @@ class UserController extends Controller {
         return response()->json([
             'status' => true,
             'message' => 'Request sent successfully.',
+            'tokens' => $tokens
         ], 201);
     }
 
