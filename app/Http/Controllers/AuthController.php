@@ -42,6 +42,7 @@ class AuthController extends Controller {
 		
 		$user = JWTAuth::user();
 		$user->token = $token;
+        $firebase_token = $user->firebase_token;
         $health_record = Health_record::where('user_id', $user->id)->get();
         $is_available = $health_record[0]->is_available;
         
@@ -53,11 +54,12 @@ class AuthController extends Controller {
         $user['is_available'] = $is_available;
         $user['long'] = $long;
         $user['lat'] = $lat;
+        $user['token_firebase'] = $firebase_token;
 
 		return response()->json([
             'status' => true,
             'message' => 'User successfully logged in',
-            'user' => $user
+            'user' => $user,
         ], 201);
 	}
 
