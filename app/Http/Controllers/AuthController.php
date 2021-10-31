@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Health_record;
 use App\Models\City;
+use App\Models\Blood_type;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -45,6 +47,9 @@ class AuthController extends Controller {
         $firebase_token = $user->firebase_token;
         $health_record = Health_record::where('user_id', $user->id)->get();
         $is_available = $health_record[0]->is_available;
+        $blood_type_id = $health_record[0]->blood_type_id;
+        $blood_type = Blood_type::where('id', $blood_type_id)->get('type');
+
         
 
         $city_data = City::where('id', $user->city_id)->get();
@@ -55,6 +60,7 @@ class AuthController extends Controller {
         $user['long'] = $long;
         $user['lat'] = $lat;
         $user['token_firebase'] = $firebase_token;
+        $user['blood_type'] = $blood_type[0]['type'];
 
 		return response()->json([
             'status' => true,
