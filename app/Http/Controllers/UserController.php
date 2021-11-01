@@ -308,7 +308,8 @@ class UserController extends Controller {
 
     public function make_request(Request $request) {
         $id = JWTAuth::user()->id;
-        $health_records = Health_record::where('blood_type_id', $request->blood_type)->get();
+        $health_records = Health_record::where('blood_type_id', $request->blood_type)
+                                        ->where('is_available', 1)->get();
         $blood_type_id = Blood_type::where('id', $request->blood_type)->get();
         $blood_type = $blood_type_id[0]->type;
 
