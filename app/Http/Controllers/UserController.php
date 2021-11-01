@@ -103,7 +103,7 @@ class UserController extends Controller {
 
         $notifications = Notification::select('*')
                                      ->where('receiver', $id)
-                                     ->orderBy('created_at', 'asc') 
+                                     ->orderBy('id', 'desc') 
                                      ->get();
         return $notifications;
     }
