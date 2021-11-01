@@ -121,6 +121,8 @@ class UserController extends Controller {
                      'blood_types.type',
                      'cities.name as city',
                      'hospitals.name as hospital',
+                     'hospitals.lat',
+                     'hospitals.long',
                      'users.first_name',
                      'users.last_name',
                      'users.firebase_token',
