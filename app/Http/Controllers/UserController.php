@@ -128,7 +128,7 @@ class UserController extends Controller {
                      'users.firebase_token',
                      'users.id as user_id',
                      'blood_requests.created_at')
-            ->orderBy('blood_requests.created_at', 'asc')  
+            ->orderBy('blood_requests.id', 'desc')  
             ->get();
             
             return $requests;
