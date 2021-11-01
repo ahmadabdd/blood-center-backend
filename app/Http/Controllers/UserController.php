@@ -207,6 +207,32 @@ class UserController extends Controller {
 
         $request_donations = DB::table('donations')
                                ->where('blood_request_id', $blood_request_id)
+                               ->where('is_accepted', 0)
+                               ->join('users', 'donations.user_id', '=', 'users.id')
+                               ->join('blood_requests', 'donations.blood_request_id', '=', 'blood_requests.id')
+                               ->join('blood_types', 'blood_requests.blood_type_id', '=', 'blood_types.id')
+                               ->join('cities', 'blood_requests.city_id', '=', 'cities.id')
+                               ->join('hospitals', 'blood_requests.hospital_id', '=', 'hospitals.id')
+                               ->select('donations.id', 
+                                        'donations.is_accepted',
+                                        'users.id as user_id' ,
+                                        'users.first_name',
+                                        'users.last_name',
+                                        'users.firebase_token',
+                                        'users.profile_picture_url',
+                                        'blood_types.type',
+                                        'cities.name as city',
+                                        'hospitals.name as hospital',
+                                        'donations.created_at')
+                               ->get();
+        return $request_donations;
+    }
+
+    public function get_request_donations_fulfilled(Request $request) {
+        $blood_request_id = $request->request_id;
+
+        $request_donations = DB::table('donations')
+                               ->where('blood_request_id', $blood_request_id)
                                ->where('is_accepted', 1)
                                ->join('users', 'donations.user_id', '=', 'users.id')
                                ->join('blood_requests', 'donations.blood_request_id', '=', 'blood_requests.id')

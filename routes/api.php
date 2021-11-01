@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('get_user_requests', [UserController::class, 'get_user_requests'])->name('api:get_user_requests');
     Route::get('get_user_requests_fulfilled', [UserController::class, 'get_user_requests_fulfilled'])->name('api:get_user_requests_fulfilled');
     Route::post('get_request_donations', [UserController::class, 'get_request_donations'])->name('api:get_request_donations');
+    Route::post('get_request_donations_fulfilled', [UserController::class, 'get_request_donations_fulfilled'])->name('api:get_request_donations_fulfilled');
     Route::get('get_user_info', [UserController::class, 'get_user_info'])->name('api:get_user_info');
     Route::post('make_request', [UserController::class, 'make_request'])->name('api:make_request');
     Route::post('close_request', [UserController::class, 'close_request'])->name('api:close_request');
