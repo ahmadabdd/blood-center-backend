@@ -26,87 +26,87 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Users seeders
-        User::insert([
-            "first_name"=> "Ahmad",
-            "last_name"=> "Abd",
-            "email"=> "ahmad@gmail.com",
-            "password"=> bcrypt("ahmad123"),
-            "city_id"=> "7",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
-            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
-        ]);
+        // User::insert([
+        //     "first_name"=> "Ahmad",
+        //     "last_name"=> "Abd",
+        //     "email"=> "ahmad@gmail.com",
+        //     "password"=> bcrypt("ahmad123"),
+        //     "city_id"=> "7",
+        //     "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+        //     "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
+        // ]);
 
-        User::insert([
-            "first_name"=> "Nader",
-            "last_name"=> "Zaeter",
-            "email"=> "nader@gmail.com",
-            "password"=> bcrypt("nader123"),
-            "city_id"=> "3",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
-            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
-        ]);
+        // User::insert([
+        //     "first_name"=> "Nader",
+        //     "last_name"=> "Zaeter",
+        //     "email"=> "nader@gmail.com",
+        //     "password"=> bcrypt("nader123"),
+        //     "city_id"=> "3",
+        //     "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+        //     "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
+        // ]);
 
-        User::insert([
-            "first_name"=> "Abdullah",
-            "last_name"=> "Alshami",
-            "email"=> "abdullah@gmail.com",
-            "password"=> bcrypt("abdullah123"),
-            "city_id"=> "2",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
-            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
-        ]);
+        // User::insert([
+        //     "first_name"=> "Abdullah",
+        //     "last_name"=> "Alshami",
+        //     "email"=> "abdullah@gmail.com",
+        //     "password"=> bcrypt("abdullah123"),
+        //     "city_id"=> "2",
+        //     "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+        //     "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
+        // ]);
 
-        User::insert([
-            "first_name"=> "Ranim",
-            "last_name"=> "Obeidi",
-            "email"=> "ranim@gmail.com",
-            "password"=> bcrypt("ranim123"),
-            "city_id"=> "1",
-            "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
-            "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
-        ]);
+        // User::insert([
+        //     "first_name"=> "Ranim",
+        //     "last_name"=> "Obeidi",
+        //     "email"=> "ranim@gmail.com",
+        //     "password"=> bcrypt("ranim123"),
+        //     "city_id"=> "1",
+        //     "profile_picture_url" => "https://blood-center.tk/storage/facebook-default-photo-male_1-1.jpg",
+        //     "firebase_token" => "ExponentPushToken[1frKTGIDmWxMrxv3KFhWKm]"
+        // ]);
 
 
         // Health_record seeders
-        Health_record::insert([
-            "user_id" => 1,
-            "blood_type_id" => 5,
-            "date_of_birth" => "1998-07-11",
-            "last_donation" => "2021-08-18",
-            "is_available" => 1,
-            "is_smoker" => 0,
-            "have_tattoo" => 0,
-        ]);
+        // Health_record::insert([
+        //     "user_id" => 1,
+        //     "blood_type_id" => 5,
+        //     "date_of_birth" => "1998-07-11",
+        //     "last_donation" => "2021-08-18",
+        //     "is_available" => 1,
+        //     "is_smoker" => 0,
+        //     "have_tattoo" => 0,
+        // ]);
 
-        Health_record::insert([
-            "user_id" => 2,
-            "blood_type_id" => 3,
-            "date_of_birth" => "1999-07-11",
-            "last_donation" => "2020-03-20",
-            "is_available" => 1,
-            "is_smoker" => 0,
-            "have_tattoo" => 0,
-        ]);
+        // Health_record::insert([
+        //     "user_id" => 2,
+        //     "blood_type_id" => 3,
+        //     "date_of_birth" => "1999-07-11",
+        //     "last_donation" => "2020-03-20",
+        //     "is_available" => 1,
+        //     "is_smoker" => 0,
+        //     "have_tattoo" => 0,
+        // ]);
 
-        Health_record::insert([
-            "user_id" => 3,
-            "blood_type_id" => 6,
-            "date_of_birth" => "1999-01-01",
-            "last_donation" => "2021-04-05",
-            "is_available" => 1,
-            "is_smoker" => 0,
-            "have_tattoo" => 0,
-        ]);
+        // Health_record::insert([
+        //     "user_id" => 3,
+        //     "blood_type_id" => 6,
+        //     "date_of_birth" => "1999-01-01",
+        //     "last_donation" => "2021-04-05",
+        //     "is_available" => 1,
+        //     "is_smoker" => 0,
+        //     "have_tattoo" => 0,
+        // ]);
 
-        Health_record::insert([
-            "user_id" => 4,
-            "blood_type_id" => 8,
-            "date_of_birth" => "1999-04-04",
-            "last_donation" => "2019-04-21",
-            "is_available" => 1,
-            "is_smoker" => 0,
-            "have_tattoo" => 0,
-        ]);
+        // Health_record::insert([
+        //     "user_id" => 4,
+        //     "blood_type_id" => 8,
+        //     "date_of_birth" => "1999-04-04",
+        //     "last_donation" => "2019-04-21",
+        //     "is_available" => 1,
+        //     "is_smoker" => 0,
+        //     "have_tattoo" => 0,
+        // ]);
 
 
         // Blood Type seeders

@@ -612,7 +612,6 @@ class UserController extends Controller {
         DB::table('users')
           ->where('id', $id)
           ->update([
-            //  'profile_picture_url' => Config::get('APP_URL') . 'storage/' . $imageName
              'profile_picture_url' => "https://blood-center.tk/storage/" . $imageName
           ]);
 
