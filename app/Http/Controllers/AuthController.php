@@ -96,7 +96,7 @@ class AuthController extends Controller {
             'password' => bcrypt($request->password),
             'city_id' => $request->city_id,
             'firebase_token' => $request->firebase_token,
-            'profile_picture_url' => "https://blood-center.tk/storage/yuJpOXd8F5d4.jpg",
+            'profile_picture_url' => "https://blood-center.tk/storage/822kdtuWl7Mz.jpg",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
