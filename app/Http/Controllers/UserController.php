@@ -349,7 +349,8 @@ class UserController extends Controller {
             return response()->json([
                 'status' => true,
                 'message' => 'Request sent successfully.',
-                'tokens' => $tokens
+                'tokens' => $tokens,
+                'blood_type' => $blood_type
             ], 201);
         }
       
