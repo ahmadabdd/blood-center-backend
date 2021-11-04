@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,17 @@ use App\Http\Controllers\UserController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//Web routes
+Route::get('getApos', [WebController::class, 'getApos'])->name('api:getApos');
+Route::get('getAneg', [WebController::class, 'getAneg'])->name('api:getAneg');
+Route::get('getBpos', [WebController::class, 'getBpos'])->name('api:getBpos');
+Route::get('getBneg', [WebController::class, 'getBneg'])->name('api:getBneg');
+Route::get('getABpos', [WebController::class, 'getABpos'])->name('api:getABpos');
+Route::get('getABneg', [WebController::class, 'getABneg'])->name('api:getABneg');
+Route::get('getOpos', [WebController::class, 'getOpos'])->name('api:getOpos');
+Route::get('getOneg', [WebController::class, 'getOneg'])->name('api:getOneg');
 
+//App routes
 Route::post('login', [AuthController::class, 'login'])->name('api:login');
 Route::post('register', [AuthController::class, 'register'])->name('api:register');
 
