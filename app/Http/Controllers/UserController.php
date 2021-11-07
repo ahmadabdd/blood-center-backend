@@ -175,6 +175,7 @@ class UserController extends Controller {
                      'hospitals.name as hospital',
                      'blood_types.type',
                      'blood_requests.created_at')
+            ->orderBy('blood_requests.id', 'desc')
             ->get();
         return $user_requests;
 	}
@@ -198,6 +199,7 @@ class UserController extends Controller {
                      'hospitals.name as hospital',
                      'blood_types.type',
                      'blood_requests.created_at')
+            ->orderBy('blood_requests.id', 'desc')
             ->get();
         return $user_requests;
 	}
