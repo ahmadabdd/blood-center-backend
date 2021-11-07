@@ -300,6 +300,7 @@ class UserController extends Controller {
                                         'cities.name as city',
                                         'hospitals.name as hospital',
                                         'donations.created_at')
+                               ->orderBy('donations.id', 'desc')
                                ->get();
         return $user_donations;
     }
