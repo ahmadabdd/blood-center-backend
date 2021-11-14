@@ -12,17 +12,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Config;
-
 use JWTAuth;
 
 class AuthController extends Controller {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    // }
 
-
-    function login(Request $request){
+    function login(Request $request) {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
@@ -42,6 +36,7 @@ class AuthController extends Controller {
 			return json_encode(["error" => "Error occured"]);
 		}
 		
+        //adding the needed data to the user
 		$user = JWTAuth::user();
 		$user->token = $token;
         $firebase_token = $user->firebase_token;
@@ -51,7 +46,6 @@ class AuthController extends Controller {
         $blood_type = Blood_type::where('id', $blood_type_id)->get('type');
 
         
-
         $city_data = City::where('id', $user->city_id)->get();
         $long = $city_data[0]->long;
         $lat = $city_data[0]->lat;

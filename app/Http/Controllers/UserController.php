@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Config;
-
-
-
-
 use JWTAuth;
-use Carbon\Carbon;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Health_record;
 use App\Models\Blood_type;
@@ -64,15 +59,6 @@ use App\Models\Connection;
         
 class UserController extends Controller {
 
-    // testing function. temp.
-	public function test() {
-        $user = JWTAuth::user();
-        $health_record = Health_record::where('user_id', $user->id)->get();
-        $is_available = $health_record[0]->is_available;
-        $user['is_available'] = $is_available;
-		return $user;
-	}
-
 	public function get_blood_types() {
         $blood_types = Blood_type::select('*')->get();
         return $blood_types;
@@ -92,10 +78,8 @@ class UserController extends Controller {
                              ->get();
         return $hospitals;
         }
-        $city_id = $request->city_id;
         $hospitals = Hospital::select('*')->get();
         return $hospitals;
-        
 	}
 
     public function get_notifications() {
